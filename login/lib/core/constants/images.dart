@@ -10,5 +10,4 @@ class AppImages{
 
    //welcome
     static const String welcome = "assets/svg/welcome.svg";
-
 }

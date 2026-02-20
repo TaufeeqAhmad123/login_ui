@@ -36,6 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   dots_indicator: ^4.0.1
   flutter_svg: ^2.2.3
+  google_fonts: ^8.0.2
+  provider: ^6.1.5+1
 
 dev_dependencies:
   flutter_test:
@@ -79,7 +81,7 @@ flutter:
   fonts:
     - family: NicoMoji
       fonts:
-       - asset: NicoMoji-Regular.ttf
+       - asset: assets/font/NicoMoji-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
