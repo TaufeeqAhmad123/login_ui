@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -38,29 +39,41 @@ class _OnbaordingScreenState extends State<OnbaordingScreen> {
                   },
                   itemBuilder: (context, index) {
                     return Column(
+                      key: ValueKey(index),
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 60),
 
-                        Center(
-                          child: SvgPicture.asset(
-                            onboardingData[index].image,
-                            height: 250,
+                        FadeInDown(
+                          duration: const Duration(milliseconds: 600),
+                          child: Center(
+                            child: SvgPicture.asset(
+                              onboardingData[index].image,
+                              height: 250,
+                            ),
                           ),
                         ),
 
                         const SizedBox(height: 90),
 
-                        Text(
-                          onboardingData[index].title,
-                          style: AppTextStyles.onbaordingtitle,
+                        FadeInUp(
+                          delay: const Duration(milliseconds: 200),
+                          duration: const Duration(milliseconds: 600),
+                          child: Text(
+                            onboardingData[index].title,
+                            style: AppTextStyles.onbaordingtitle,
+                          ),
                         ),
 
                         const SizedBox(height: 10),
 
-                        Text(
-                          onboardingData[index].subtitle,
-                          style: AppTextStyles.onboardingsubTitle,
+                        FadeInUp(
+                          delay: const Duration(milliseconds: 400),
+                          duration: const Duration(milliseconds: 600),
+                          child: Text(
+                            onboardingData[index].subtitle,
+                            style: AppTextStyles.onboardingsubTitle,
+                          ),
                         ),
                       ],
                     );
@@ -93,7 +106,9 @@ class _OnbaordingScreenState extends State<OnbaordingScreen> {
                       if (_currentPage == 2) {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => const LoginScreen()),
+                          MaterialPageRoute(
+                            builder: (context) => const LoginScreen(),
+                          ),
                         );
                       }
                       _pageController.nextPage(
