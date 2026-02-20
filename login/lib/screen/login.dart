@@ -149,12 +149,15 @@ class textField extends StatelessWidget {
     return TextFormField(
       decoration: InputDecoration(
         hintText: data,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
         hintStyle: GoogleFonts.mulish(
           fontSize: 14,
           fontWeight: FontWeight.w500,
           color: Colors.black54,
         ),
-        border: OutlineInputBorder(),
+       
         fillColor: fillColor,
         filled: true,
 

@@ -5,6 +5,7 @@ import 'package:login/core/constants/App_text.dart';
 import 'package:login/core/constants/app_text_styles.dart';
 import 'package:login/core/constants/colors.dart';
 import 'package:login/core/constants/images.dart';
+import 'package:login/screen/code_screen.dart';
 import 'package:login/screen/login.dart';
 
 class RegistorScreen extends StatelessWidget {
@@ -113,7 +114,9 @@ class RegistorScreen extends StatelessWidget {
             ),
 
             Spacer(),
-            MyButton(title: "Next", onPressed: () {}),
+            MyButton(title: "Next", onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const CodeScreen(),));
+            }),
             SizedBox(height: 15),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

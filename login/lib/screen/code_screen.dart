@@ -1,0 +1,123 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:login/core/constants/App_text.dart';
+import 'package:login/core/constants/app_text_styles.dart' show AppTextStyles;
+import 'package:login/core/constants/colors.dart';
+import 'package:login/screen/login.dart';
+
+class CodeScreen extends StatefulWidget {
+  const CodeScreen({super.key});
+
+  @override
+  State<CodeScreen> createState() => _CodeScreenState();
+}
+
+class _CodeScreenState extends State<CodeScreen> {
+  final List<TextEditingController> _controllers = List.generate(
+    6,
+    (_) => TextEditingController(),
+  );
+  final List<FocusNode> _focusNodes = List.generate(6, (_) => FocusNode());
+
+  @override
+  void dispose() {
+    for (var c in _controllers) {
+      c.dispose();
+    }
+    for (var f in _focusNodes) {
+      f.dispose();
+    }
+    super.dispose();
+  }
+
+  void _onChanged(String value, int index) {
+    if (value.length == 1 && index < 5) {
+      // Move to next field
+      _focusNodes[index + 1].requestFocus();
+    }
+    if (value.isEmpty && index > 0) {
+      // Move to previous field on backspace
+      _focusNodes[index - 1].requestFocus();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 100),
+            Text(
+              'Almost there',
+              style: AppTextStyles.welcomeText.copyWith(fontSize: 36),
+            ),
+            SizedBox(height: 10),
+            Text(AppText.codeText, style: AppTextStyles.bodyText),
+            SizedBox(height: 30),
+
+            /// 6-digit code input row
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(6, (index) {
+                return Container(
+                  height: 55,
+                  width: 50,
+                  decoration: BoxDecoration(
+                    color: fillColor,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: _focusNodes[index].hasFocus
+                          ? primaryColor
+                          : Colors.transparent,
+                      width: 1.5,
+                    ),
+                  ),
+                  child: Center(
+                    child: TextField(
+                      controller: _controllers[index],
+                      focusNode: _focusNodes[index],
+                      onChanged: (value) => _onChanged(value, index),
+                      keyboardType: TextInputType.number,
+                      textAlign: TextAlign.center,
+                      maxLength: 1,
+                      style: AppTextStyles.welcomeText.copyWith(fontSize: 22),
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      decoration: const InputDecoration(
+                        counterText: '',
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                );
+              }),
+            ),
+            SizedBox(height: 40,),
+            MyButton(title: "Verify", onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const CodeScreen(),));
+            }),
+            SizedBox(height: 40,),
+            Center(
+              child: Text("Didn't receive a code?  Resend Code",style: GoogleFonts.mulish(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),),
+            ),
+            SizedBox(height: 10,),
+            Center(
+              child: Text("Request a new code in 00:33s",style: GoogleFonts.mulish(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+                color: Colors.grey.shade600,
+              ),),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
