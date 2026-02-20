@@ -4,8 +4,8 @@ class AppImages{
   static const String logo2 = "assets/svg/logo2.svg";
   
   //onbaording
-   static const String onbaording1 = "assets/svg/onbaording1.svg";
-   static const String onbaording2 = "assets/svg/onbaording2.svg";
+   static const String onbaording1 = "assets/svg/onboarding1.svg";
+   static const String onbaording2 = "assets/svg/onboarding2.svg";
    static const String onbaording3 = "assets/svg/onbaording3.svg";
 
    //welcome

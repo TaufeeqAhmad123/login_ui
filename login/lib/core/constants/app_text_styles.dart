@@ -64,10 +64,10 @@ class AppTextStyles {
   );
 
   // Small / Caption Text
-  static const TextStyle captionText = TextStyle(
-    fontSize: 12,
+  static const TextStyle smallText = TextStyle(
+    fontSize: 11,
     fontWeight: FontWeight.w400,
-    color: Colors.grey,
+   
   );
 
   // Button Text

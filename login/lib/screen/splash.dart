@@ -4,6 +4,7 @@ import 'package:login/core/constants/App_text.dart';
 import 'package:login/core/constants/app_text_styles.dart';
 import 'package:login/core/constants/colors.dart';
 import 'package:login/core/constants/images.dart';
+import 'package:login/screen/onbaording.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,16 +15,30 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const OnbaordingScreen()),
+      );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: primaryColor,
-      body:Center(child:Column(
-        children:[
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
             SvgPicture.asset(AppImages.logo),
-            SizedBox(height:10),
-            Text(AppText.travello ,style:AppTextStyles.appTitle,),
-        ]
-      ))
+            SizedBox(height: 10),
+            Text(AppText.travello, style: AppTextStyles.appTitle),
+          ],
+        ),
+      ),
     );
   }
 }
