@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,69 +52,106 @@ class _CodeScreenState extends State<CodeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 100),
-            Text(
-              'Almost there',
-              style: AppTextStyles.welcomeText.copyWith(fontSize: 36),
+            FadeInDown(
+              duration: const Duration(milliseconds: 600),
+              child: Text(
+                'Almost there',
+                style: AppTextStyles.welcomeText.copyWith(fontSize: 36),
+              ),
             ),
             SizedBox(height: 10),
-            Text(AppText.codeText, style: AppTextStyles.bodyText),
+            FadeInDown(
+              delay: const Duration(milliseconds: 200),
+              duration: const Duration(milliseconds: 600),
+              child: Text(AppText.codeText, style: AppTextStyles.bodyText),
+            ),
             SizedBox(height: 30),
 
             /// 6-digit code input row
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(6, (index) {
-                return Container(
-                  height: 55,
-                  width: 50,
-                  decoration: BoxDecoration(
-                    color: fillColor,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: _focusNodes[index].hasFocus
-                          ? primaryColor
-                          : Colors.transparent,
-                      width: 1.5,
-                    ),
-                  ),
-                  child: Center(
-                    child: TextField(
-                      controller: _controllers[index],
-                      focusNode: _focusNodes[index],
-                      onChanged: (value) => _onChanged(value, index),
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      maxLength: 1,
-                      style: AppTextStyles.welcomeText.copyWith(fontSize: 22),
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      decoration: const InputDecoration(
-                        counterText: '',
-                        border: InputBorder.none,
+            FadeInLeft(
+              delay: const Duration(milliseconds: 400),
+              duration: const Duration(milliseconds: 600),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: List.generate(6, (index) {
+                  return Container(
+                    height: 55,
+                    width: 50,
+                    decoration: BoxDecoration(
+                      color: fillColor,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: _focusNodes[index].hasFocus
+                            ? primaryColor
+                            : Colors.transparent,
+                        width: 1.5,
                       ),
                     ),
+                    child: Center(
+                      child: TextField(
+                        controller: _controllers[index],
+                        focusNode: _focusNodes[index],
+                        onChanged: (value) => _onChanged(value, index),
+                        keyboardType: TextInputType.number,
+                        textAlign: TextAlign.center,
+                        maxLength: 1,
+                        style: AppTextStyles.welcomeText.copyWith(fontSize: 22),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                        decoration: const InputDecoration(
+                          counterText: '',
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ),
+            SizedBox(height: 40),
+            FadeInUp(
+              delay: const Duration(milliseconds: 600),
+              duration: const Duration(milliseconds: 600),
+              child: MyButton(
+                title: "Verify",
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const CodeScreen()),
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 40),
+            FadeIn(
+              delay: const Duration(milliseconds: 800),
+              duration: const Duration(milliseconds: 600),
+              child: Center(
+                child: Text(
+                  "Didn't receive a code?  Resend Code",
+                  style: GoogleFonts.mulish(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
                   ),
-                );
-              }),
+                ),
+              ),
             ),
-            SizedBox(height: 40,),
-            MyButton(title: "Verify", onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const CodeScreen(),));
-            }),
-            SizedBox(height: 40,),
-            Center(
-              child: Text("Didn't receive a code?  Resend Code",style: GoogleFonts.mulish(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-              ),),
-            ),
-            SizedBox(height: 10,),
-            Center(
-              child: Text("Request a new code in 00:33s",style: GoogleFonts.mulish(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: Colors.grey.shade600,
-              ),),
+            SizedBox(height: 10),
+            FadeIn(
+              delay: const Duration(milliseconds: 1000),
+              duration: const Duration(milliseconds: 600),
+              child: Center(
+                child: Text(
+                  "Request a new code in 00:33s",
+                  style: GoogleFonts.mulish(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey.shade600,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
