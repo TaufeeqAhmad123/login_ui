@@ -6,6 +6,7 @@ import 'package:login/core/constants/App_text.dart';
 import 'package:login/core/constants/app_text_styles.dart' show AppTextStyles;
 import 'package:login/core/constants/colors.dart';
 import 'package:login/screen/login.dart';
+import 'package:login/screen/welcome.dart';
 
 class CodeScreen extends StatefulWidget {
   const CodeScreen({super.key});
@@ -118,7 +119,7 @@ class _CodeScreenState extends State<CodeScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const CodeScreen()),
+                    MaterialPageRoute(builder: (context) => const WelcomeScreen()),
                   );
                 },
               ),
