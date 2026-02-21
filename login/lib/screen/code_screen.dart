@@ -83,7 +83,7 @@ class _CodeScreenState extends State<CodeScreen> {
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
                         color: _focusNodes[index].hasFocus
-                            ? primaryColor
+                            ? Color.fromARGB(255, 207, 240, 243)
                             : Colors.transparent,
                         width: 1.5,
                       ),
